@@ -14,20 +14,20 @@ public class Controller {
     @Autowired
     private ResidentRepository residentRepository;
 
-    //Get all users
+    //Display all residents
     @GetMapping(value = "/getusers")
     public List<Resident> getUsers() {
         return residentRepository.findAll();
     }
 
-    //Add user
+    //Add resident
     @PostMapping(value = "/adduser")
     public String addResident(@RequestBody Resident resident) {
         residentRepository.save(resident);
         return "Resident has been saved succesully";
     }
 
-    //Update user
+    //Update resident
     @PutMapping(value = "/updateuser/{id}")
     public Resident updateResident(@PathVariable long id, @RequestBody Resident resident) {
         Resident updatedResident = residentRepository.findById(id).get();
@@ -39,7 +39,7 @@ public class Controller {
         return updatedResident;
     }
 
-    //Delete User
+    //Delete resident
     @DeleteMapping(value = "/deleteuser/{id}")
     public String deleteResident(@PathVariable long id) {
         Resident deletedResident = residentRepository.findById(id).get();
