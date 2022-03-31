@@ -5,6 +5,8 @@ import com.chidiudoapp.residentapp.repository.ResidentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ResidentServiceImpl implements ResidentService{
 
@@ -14,5 +16,10 @@ public class ResidentServiceImpl implements ResidentService{
     @Override
     public Resident addResident(Resident resident) {
         return residentRepository.save(resident);
+    }
+
+    @Override
+    public List<Resident> listAllResidents() {
+        return residentRepository.findAll();
     }
 }
