@@ -23,7 +23,10 @@ public class Controller {
     }
 
     //List all residents
-    @GetMapping
+    @GetMapping("listusers")
+    public List<Resident> listAllResidents() {
+        return residentService.listAllResidents();
+    }
 
 
 }
