@@ -15,36 +15,12 @@ public class Controller {
     @Autowired
     private ResidentService residentService;
 
-    //Display all residents
-    @GetMapping(value = "/getusers")
-    public List<Resident> getUsers() {
-        return residentRepository.findAll();
-    }
 
     //Add resident
-    @PostMapping(value = "/adduser")
-    public String addResident(@RequestBody Resident resident) {
-        residentRepository.save(resident);
-        return "Resident has been saved succesully";
+    @PostMapping("/adduser")
+    public Resident addResident(@RequestBody Resident resident) {
+        return residentService.addResident(resident);
     }
 
-    //Update resident
-    @PutMapping(value = "/updateuser/{id}")
-    public Resident updateResident(@PathVariable long id, @RequestBody Resident resident) {
-        Resident updatedResident = residentRepository.findById(id).get();
-        updatedResident.setName(resident.getName());
-        updatedResident.setRole(resident.getRole());
-        updatedResident.setGender(resident.getGender());
-        updatedResident.setAge(resident.getAge());
-        residentRepository.save(updatedResident);
-        return updatedResident;
-    }
 
-    //Delete resident
-    @DeleteMapping(value = "/deleteuser/{id}")
-    public String deleteResident(@PathVariable long id) {
-        Resident deletedResident = residentRepository.findById(id).get();
-        residentRepository.delete(deletedResident);
-        return "Resident with ID: " +id +" has been deleted";
-    }
 }
