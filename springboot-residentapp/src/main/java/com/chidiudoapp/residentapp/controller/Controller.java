@@ -2,6 +2,7 @@ package com.chidiudoapp.residentapp.controller;
 
 import com.chidiudoapp.residentapp.model.Resident;
 import com.chidiudoapp.residentapp.repository.ResidentRepository;
+import com.chidiudoapp.residentapp.services.ResidentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,7 +13,7 @@ import java.util.List;
 public class Controller {
 
     @Autowired
-    private ResidentRepository residentRepository;
+    private ResidentService residentService;
 
     //Display all residents
     @GetMapping(value = "/getusers")
