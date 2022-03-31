@@ -22,5 +22,8 @@ public class Controller {
         return residentService.addResident(resident);
     }
 
+    //List all residents
+    @GetMapping
+
 
 }
