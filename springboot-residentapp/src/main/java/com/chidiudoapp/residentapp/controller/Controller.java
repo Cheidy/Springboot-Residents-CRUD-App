@@ -23,16 +23,22 @@ public class Controller {
     }
 
     //List all residents
-    @GetMapping("listusers")
+    @GetMapping("/listusers")
     public List<Resident> listAllResidents() {
         return residentService.listAllResidents();
     }
 
     //Find residents by ID
-    @GetMapping("listUsers/{id}")
+    @GetMapping("/listUsers/{id}")
     public Resident listResidentById(@PathVariable("id") Long residentId) {
         return residentService.listResidentsById(residentId);
     }
 
+    //Delete resident
+    @DeleteMapping("/listusers/{id}")
+    public String deleteResident (@PathVariable("id") Long residentId) {
+        residentService.deleteResident(residentId);
+        return "Residence has been deleted";
+    }
 
 }

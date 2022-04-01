@@ -27,4 +27,9 @@ public class ResidentServiceImpl implements ResidentService{
     public Resident listResidentsById(Long residentId) {
         return residentRepository.findById(residentId).get();
     }
+
+    @Override
+    public void deleteResident(Long residentId) {
+         residentRepository.deleteById(residentId);
+    }
 }
