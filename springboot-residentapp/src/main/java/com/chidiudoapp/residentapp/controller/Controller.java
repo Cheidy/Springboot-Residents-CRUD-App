@@ -29,7 +29,7 @@ public class Controller {
     }
 
     //Find residents by ID
-    @GetMapping("/listUsers/{id}")
+    @GetMapping("/listusers/{id}")
     public Resident listResidentById(@PathVariable("id") Long residentId) {
         return residentService.listResidentsById(residentId);
     }
@@ -39,6 +39,13 @@ public class Controller {
     public String deleteResident (@PathVariable("id") Long residentId) {
         residentService.deleteResident(residentId);
         return "Residence has been deleted";
+    }
+
+    //Update resident
+    @PutMapping("/updateuser/{id}")
+    public Resident updateResident (@PathVariable("id") Long residentId,
+                                    @RequestBody Resident resident) {
+        return residentService.updateResident(residentId, resident);
     }
 
 }
