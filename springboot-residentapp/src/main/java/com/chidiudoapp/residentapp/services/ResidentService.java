@@ -13,4 +13,6 @@ public interface ResidentService {
     public Resident listResidentsById(Long residentId);
 
     public void deleteResident(Long residentId);
+
+    public Resident updateResident(Long residentId, Resident resident);
 }
