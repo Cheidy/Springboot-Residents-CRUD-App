@@ -32,4 +32,9 @@ public class ResidentServiceImpl implements ResidentService{
     public void deleteResident(Long residentId) {
          residentRepository.deleteById(residentId);
     }
+
+    @Override
+    public Resident updateResident(Long residentId, Resident resident) {
+        return null;
+    }
 }
