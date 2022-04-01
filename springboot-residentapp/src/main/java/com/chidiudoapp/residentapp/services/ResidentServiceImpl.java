@@ -22,4 +22,9 @@ public class ResidentServiceImpl implements ResidentService{
     public List<Resident> listAllResidents() {
         return residentRepository.findAll();
     }
+
+    @Override
+    public Resident listResidentsById(Long residentId) {
+        return residentRepository.findById(residentId).get();
+    }
 }

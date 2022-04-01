@@ -9,4 +9,6 @@ public interface ResidentService {
     public Resident addResident(Resident resident);
 
     public List<Resident> listAllResidents();
+
+    public Resident listResidentsById(Long residentId);
 }

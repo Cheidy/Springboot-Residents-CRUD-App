@@ -28,5 +28,11 @@ public class Controller {
         return residentService.listAllResidents();
     }
 
+    //Find residents by ID
+    @GetMapping("listUsers/{id}")
+    public Resident listResidentById(@PathVariable("id") Long residentId) {
+        return residentService.listResidentsById(residentId);
+    }
+
 
 }
