@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class ResidentServiceImpl implements ResidentService{
@@ -35,6 +36,10 @@ public class ResidentServiceImpl implements ResidentService{
 
     @Override
     public Resident updateResident(Long residentId, Resident resident) {
-        return null;
+        Resident updateDB = residentRepository.findById(residentId).get();
+
+        //if the 'name' variable is empty and the rest of the variables are not declared or updated
+        if (Objects.nonNull(resident.getName()) && !"".equalsIgnoreCase(resident.getName()))
+
     }
 }
