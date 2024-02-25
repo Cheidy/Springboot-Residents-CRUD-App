@@ -8,8 +8,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin("*")
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/residents")
 public class Controller {
 
     @Autowired
@@ -17,32 +18,32 @@ public class Controller {
 
 
     //Add resident
-    @PostMapping("/adduser")
+    @PostMapping()
     public Resident addResident(@RequestBody Resident resident) {
         return residentService.addResident(resident);
     }
 
     //List all residents
-    @GetMapping("/listusers")
+    @GetMapping()
     public List<Resident> listAllResidents() {
         return residentService.listAllResidents();
     }
 
     //Find residents by ID
-    @GetMapping("/listusers/{id}")
+    @GetMapping("/{id}")
     public Resident listResidentById(@PathVariable("id") Long residentId) {
         return residentService.listResidentsById(residentId);
     }
 
     //Delete resident
-    @DeleteMapping("/listusers/{id}")
+    @DeleteMapping("/{id}")
     public String deleteResident (@PathVariable("id") Long residentId) {
         residentService.deleteResident(residentId);
         return "Residence has been deleted";
     }
 
     //Update resident
-    @PutMapping("/updateuser/{id}")
+    @PutMapping("/{id}")
     public Resident updateResident (@PathVariable("id") Long residentId,
                                     @RequestBody Resident resident) {
         return residentService.updateResident(residentId, resident);

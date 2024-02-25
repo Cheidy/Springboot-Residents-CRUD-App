@@ -39,9 +39,9 @@ public class ResidentServiceImpl implements ResidentService{
         Resident updateDB = residentRepository.findById(residentId).get();
 
         //if the 'name' variable is empty and the rest of the variables are not declared or updated
-        if (Objects.nonNull(resident.getName()) && !"".equalsIgnoreCase(resident.getName()));
 
-        return updateDB.getName()
+
+        return updateDB;
 
     }
 }
