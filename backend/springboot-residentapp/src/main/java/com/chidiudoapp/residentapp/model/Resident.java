@@ -26,7 +26,7 @@ public class Resident {
     @Column(name = "gender")
     private String gender;
 
-    @Column(name = "age")
-    private int age;
+//    @Column(name = "age")
+//    private int age;
 
 }
