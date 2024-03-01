@@ -1,4 +1,6 @@
 import React, { useState } from 'react'
+import { createResident } from '../services/ResidentService'
+import {useNavigate} from 'react-router-dom';
 
 const ResidentComponent = () => {
 
@@ -6,12 +8,56 @@ const ResidentComponent = () => {
   const [role, setRole] = useState('')
   const [gender, setGender] = useState('')
 
+  const [errors, setErrors] = useState({
+    name: '',
+    role: '',
+    gender: ''
+  })
+
+  const navigator = useNavigate();
 
   function saveResident(r){
     r.preventDefault();
 
-    const resident = {name, role, gender}
-    console.log(resident)
+    if(validateForm){
+      const resident = {name, role, gender}
+      console.log(resident)
+  
+      createResident(resident).then((response) => {
+        console.log(response.data);
+        navigator('/residents')
+      })
+    }
+    
+  }
+
+  function validateForm() {
+    let valid = true;
+    const errorsCopy = {... errors}
+
+    if(name.trim()){
+      errorsCopy.name = '';
+    } else {
+      errorsCopy.name = "First name is required";
+      valid = false;
+    }
+
+    if(role.trim()){
+      errorsCopy.role = '';
+    } else {
+      errorsCopy.role = "Role is required";
+    }
+
+    if(role.trim()){
+      errorsCopy.gender = '';
+    } else {
+      errorsCopy.gender = "Gender is required";
+      valid = false;
+    }
+
+    setErrors(errorsCopy);
+
+    return valid;
   }
 
   return (
