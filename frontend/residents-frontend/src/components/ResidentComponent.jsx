@@ -1,12 +1,14 @@
-import React, { useState } from 'react'
-import { createResident } from '../services/ResidentService'
-import {useNavigate} from 'react-router-dom';
+import React, { useEffect, useState } from 'react'
+import { createResident, getResident } from '../services/ResidentService'
+import {useNavigate, useParams} from 'react-router-dom';
 
 const ResidentComponent = () => {
 
   const [name, setName] = useState('')
   const [role, setRole] = useState('')
   const [gender, setGender] = useState('')
+
+  const {id} = useParams();
 
   const [errors, setErrors] = useState({
     name: '',
@@ -16,10 +18,24 @@ const ResidentComponent = () => {
 
   const navigator = useNavigate();
 
+  useEffect(() => {
+
+      if(id){
+        getResident(id).then((response) => {
+          setName(response.data.name);
+          setRole(response.data.role);
+          setGender(response.data.gender);
+        }).catch(error => {
+          console.error(error)
+        })
+      }
+
+  }, [id])
+
   function saveResident(r){
     r.preventDefault();
 
-    if(validateForm){
+    if(validateForm()){
       const resident = {name, role, gender}
       console.log(resident)
   
@@ -46,9 +62,10 @@ const ResidentComponent = () => {
       errorsCopy.role = '';
     } else {
       errorsCopy.role = "Role is required";
+      valid = false;
     }
 
-    if(role.trim()){
+    if(gender.trim()){
       errorsCopy.gender = '';
     } else {
       errorsCopy.gender = "Gender is required";
@@ -60,12 +77,21 @@ const ResidentComponent = () => {
     return valid;
   }
 
+  function pageTitle() {
+      if(id) {
+        return <h2 className='text-center'>Update Resident</h2>
+      }else {
+        return <h2 className='text-center'>Add Resident</h2>
+      }
+  }
   return (
     <div className='container'>
       <br/> <br/>
       <div className='row'>
         <div className='card col-md-6 offset-md-3 offset-md-3'>
-          <h2 className='text-center'>Add Resident</h2>
+          {
+            pageTitle()
+          }
           <div className='card-body'>
             <form>
               <div className='form-group mb-2'>
@@ -75,10 +101,11 @@ const ResidentComponent = () => {
                     placeholder='Enter Resident Name'
                     name='name'
                     value={name}
-                    className='form-control'
+                    className={`form-control ${errors.name ? 'is-invalid' : ''}`}
                     onChange={(r) => setName(r.target.value)}
                 >
                 </input>
+                {errors.name && <div className='invalid-feedback'> {errors.name} </div>}
               </div>
 
               <div className='form-group mb-2'>
@@ -88,10 +115,11 @@ const ResidentComponent = () => {
                     placeholder='Enter Resident Role'
                     name='role'
                     value={role}
-                    className='form-control'
+                    className={`form-control ${errors.role ? 'is-invalid' : ''}`}
                     onChange={(r) => setRole(r.target.value)}
                 >
                 </input>
+                {errors.role && <div className='invalid-feedback'> {errors.role} </div>}
               </div>
 
               <div className='form-group mb-2'>
@@ -101,10 +129,11 @@ const ResidentComponent = () => {
                     placeholder='Enter Resident Gender'
                     name='gender'
                     value={gender}
-                    className='form-control'
+                    className={`form-control ${errors.gender ? 'is-invalid' : ''}`}
                     onChange={(r) => setGender(r.target.value)}
                 >
                 </input>
+                {errors.gender && <div className='invalid-feedback'> {errors.gender} </div>}
               </div>
 
               <button className='btn btn-danger' onClick={saveResident}>Submit</button>

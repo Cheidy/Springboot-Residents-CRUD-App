@@ -17,7 +17,8 @@ function App() {
           {/* // http://localhost: 9991/residents */}
           <Route path='/residents' element = { <ListResidentComponent /> }> </Route>
 
-          <Route path='/add-residents' element = {<ResidentComponent/> }></Route>
+          <Route path='/add-resident' element = {<ResidentComponent/> }></Route>
+          <Route path='/edit-resident/:id' element = {<ResidentComponent/> }></Route>
         </Routes>
       <FooterComponent />
     </BrowserRouter>  

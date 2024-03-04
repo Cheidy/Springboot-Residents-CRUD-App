@@ -18,7 +18,11 @@ const ListResidentComponent = () => {
     }, [])
 
     function addNewResident(){
-        navigator('/add-residents')
+        navigator('/add-resident')
+    }
+
+    function updateResident(id) {
+        navigator(`/edit-resident/${id}`)
     }
 
   return (
@@ -32,6 +36,7 @@ const ListResidentComponent = () => {
                 <th>Resident Name</th>
                 <th>Resident Role</th>
                 <th>Resident Gender</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody className='text-center'>
@@ -42,6 +47,9 @@ const ListResidentComponent = () => {
                         <td>{resident.name}</td>
                         <td>{resident.role}</td>
                         <td>{resident.gender}</td>
+                        <td>
+                            <button className='btn btn-info' onClick={() => updateResident(resident.id)}>Update</button>
+                        </td>
                     </tr>)
             }
         </tbody>
